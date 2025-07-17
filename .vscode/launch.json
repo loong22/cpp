@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) 调试程序",
+            "name": "(gdb) 编译并调试程序",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
@@ -27,8 +27,8 @@
                     "text": "-gdb-set disassembly-flavor intel",
                     "ignoreFailures": true
                 }
-            ]
+            ],
+            "preLaunchTask": "C/C++: g++.exe 生成调试程序"
         }
-
     ]
 }

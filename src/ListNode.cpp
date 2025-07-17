@@ -17,8 +17,33 @@ struct ListNode
 class Solution {
 public:
 
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {       
+#if 1
+        ListNode *head = nullptr, *tail = nullptr;
+        int carry = 0;
+        while (l1 || l2) {
+            int n1 = l1 ? l1->val: 0;
+            int n2 = l2 ? l2->val: 0;
+            int sum = n1 + n2 + carry;
+            if (!head) {
+                head = tail = new ListNode(sum % 10);
+            } else {
+                tail->next = new ListNode(sum % 10);
+                tail = tail->next;
+            }
+            carry = sum / 10;
+            if (l1) {
+                l1 = l1->next;
+            }
+            if (l2) {
+                l2 = l2->next;
+            }
+        }
+        if (carry > 0) {
+            tail->next = new ListNode(carry);
+        }
+        return head;
+#else
         std::vector<int> v1;
         std::vector<int> v2;
 
@@ -37,8 +62,8 @@ public:
             jList = jList->next;
         }
 
-        //std::reverse(v1.begin(), v1.end());
-        //std::reverse(v2.begin(), v2.end());
+        std::reverse(v1.begin(), v1.end());
+        std::reverse(v2.begin(), v2.end());
 
         long long num1 = 0, num2 = 0;
         for (int i = 0; i < v1.size(); ++i) {
@@ -52,11 +77,16 @@ public:
 
         std::vector<int> digits;
 
-        while (sum > 0) {
-            digits.push_back(sum % 10); // 获取最低位
-            sum /= 10;                  // 移除最低位
+        if(sum == 0) {
+            digits.push_back(0);
         }
-
+        else{
+            while (sum > 0) {
+                digits.push_back(sum % 10); // 获取最低位
+                sum /= 10;                  // 移除最低位
+            }
+        }
+        
         std::reverse(digits.begin(), digits.end());
     
         ListNode* lSum = nullptr;
@@ -69,6 +99,7 @@ public:
         }
 
         return lSum;
+#endif
     }
 };
 
