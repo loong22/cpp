@@ -3,13 +3,11 @@
 #include <math.h>
 #include <algorithm>
 
-using namespace std;
-
 class Solution {
 public:
     double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2)  {
 #if 1
-        if (nums1.size() > nums2.size()) {
+    if (nums1.size() > nums2.size()) {
         return findMedianSortedArrays(nums2, nums1);
     }
     
@@ -31,7 +29,7 @@ public:
         if (left1 <= right2 && left2 <= right1) {
             // 总长度为奇数
             if ((m + n) % 2 == 1) {
-                return max(left1, left2);
+                return std::max(left1, left2);
             }
             // 总长度为偶数
             return (std::max(left1, left2) + std::min(right1, right2)) / 2.0;
